@@ -1,0 +1,102 @@
+﻿@page "/novoproduto"
+
+<PageTitle>Brechó Ramires - Novo Produto</PageTitle>
+
+<RadzenText TextStyle="TextStyle.DisplayH4">
+    <RadzenIcon Icon="checkroom" />
+    Cadastrar Produto
+</RadzenText>
+
+<RadzenTemplateForm Data=@produto class="">
+    <RadzenRow Gap="1rem">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack>
+                <RadzenFormField Text="Código">
+                    <RadzenTextBox @bind-Value="produto.Codigo" Disabled />
+                </RadzenFormField>
+
+                <RadzenFormField Text="Nome do Produto">
+                    <ChildContent>
+                        <RadzenTextBox Name="Nome" @bind-Value="produto.Nome" Placeholder="Digite o nome do produto..." />
+                    </ChildContent>    
+                    <Helper>
+                        <RadzenRequiredValidator Component="Nome" Text="O nome do produto é obrigatório!" />
+                    </Helper>
+                </RadzenFormField>
+
+                <RadzenFormField Text="Quantidade">
+                    <ChildContent>
+                        <RadzenNumeric Name="Quantidade" @bind-Value="produto.Quantidade" />
+                    </ChildContent>
+                    <Helper>
+                        <RadzenRequiredValidator Component="Quantidade" Text="A quantidade é obrigatória!" />
+                    </Helper>       
+                </RadzenFormField>
+
+                <RadzenFormField Text="Marca">
+                    <RadzenTextBox @bind-Value="produto.Marca" />
+                </RadzenFormField>
+
+                <RadzenFormField Text="Categoria">
+                    <ChildContent>
+                        <RadzenDropDown Name="Categoria" @bind-Value="produto.Categoria" />
+                    </ChildContent>
+                    <Helper>
+                        <RadzenRequiredValidator Component="Categoria" Text="A categoria é obrigatória!" />
+                    </Helper>                  
+                </RadzenFormField>            
+            </RadzenStack>
+        </RadzenColumn>
+
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack>
+                <RadzenFormField Text="Tamanho">
+                    <ChildContent>
+                        <RadzenDropDown Name="Tamanho" @bind-Value="produto.Tamanho" />
+                    </ChildContent>
+                    <Helper>
+                        <RadzenRequiredValidator Component="Tamanho" Text="O tamanho é obrigatório!" />
+                    </Helper>
+                </RadzenFormField>
+
+                <RadzenFormField Text="Cor">
+                    <ChildContent>
+                        <RadzenTextBox Name="Cor" @bind-Value="produto.Cor" />
+                    </ChildContent>
+                    <Helper>
+                        <RadzenRequiredValidator Component="Cor" Text="A cor é obrigatória!" />
+                    </Helper>
+                </RadzenFormField>
+
+                <RadzenFormField Text="Preço Pago">
+                    <RadzenNumeric Format="c" @bind-Value="produto.PrecoPago" />
+                </RadzenFormField>
+
+                <RadzenFormField Text="Preço de Venda">
+                    <ChildContent>
+                        <RadzenNumeric Format="c" Name="Preço de Venda" @bind-Value="produto.Preco" />
+                    </ChildContent>
+                    <Helper>
+                        <RadzenRequiredValidator Component="Preço de Venda" Text="O preço de venda é obrigatório!" />
+                    </Helper>
+                </RadzenFormField>
+
+                <RadzenFormField Text="Origem">
+                    <RadzenRadioButtonList @bind-Value="produto.Origem" TValue="int" class="rz-m-4 rz-mt-8">
+                        <Items>
+                            <RadzenRadioButtonListItem Text="Brechó" Value="1" />
+                            <RadzenRadioButtonListItem Text="Camila" Value="2" />
+                            <RadzenRadioButtonListItem Text="Daniela" Value="3" />
+                            <RadzenRadioButtonListItem Text="Consignado" Value="4" />
+                        </Items>
+                    </RadzenRadioButtonList>
+                </RadzenFormField>
+            </RadzenStack>
+        </RadzenColumn>
+        <RadzenButton ButtonType="ButtonType.Submit" Text="Cadastrar" Icon="add_box" ></RadzenButton>
+    </RadzenRow>
+</RadzenTemplateForm>
+
+@code {
+    private Produto produto = new Produto();
+ }
