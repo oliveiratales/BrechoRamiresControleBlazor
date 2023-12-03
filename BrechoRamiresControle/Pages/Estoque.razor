@@ -2,7 +2,29 @@
 
 <PageTitle>Brechó Ramires - Estoque</PageTitle>
 
-<h1>Estoque</h1>
+<RadzenText TextStyle="TextStyle.DisplayH4">
+    <RadzenIcon Icon="inventory" />
+    Estoque
+</RadzenText>
+
+<div class="rz-p-2 rz-mt-4">
+    <RadzenDataGrid class="rz-border-radius" AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                    Data="@Produtos" TItem="Produto" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" EmptyText="Ainda não há registros.">
+        <Columns>
+            <RadzenDataGridColumn TItem="Produto" Property="Codigo" Title="Código" Frozen="true" Width="110px" TextAlign="TextAlign.Center" />
+            <RadzenDataGridColumn TItem="Produto" Property="Nome" Title="Nome" Width="180px" />
+            <RadzenDataGridColumn TItem="Produto" Property="Preco" Title="Preço" Width="130px"/>
+            <RadzenDataGridColumn TItem="Produto" Property="Quantidade" Title="Quantidade" Width="120px" />
+            <RadzenDataGridColumn TItem="Produto" Property="Marca" Title="Marca" Width="120px" />
+            <RadzenDataGridColumn TItem="Produto" Property="Categoria" Title="Categoria" Width="150px" />
+            <RadzenDataGridColumn TItem="Produto" Property="Cor" Title="Cor" Width="100px" />
+            <RadzenDataGridColumn TItem="Produto" Property="Tamanho" Title="Tamanho" Width="120px" />
+            <RadzenDataGridColumn TItem="Produto" Property="PrecoPago" Title="Preço Pago" Width="150px" />
+            <RadzenDataGridColumn TItem="Produto" Property="Origem" Title="Origem" Width="120px" />
+        </Columns>
+    </RadzenDataGrid>
+</div>
 
 @code {
+    internal List<Produto> Produtos = new List<Produto>();
 }

@@ -82,7 +82,7 @@
                 </RadzenFormField>
 
                 <RadzenFormField Text="Origem">
-                    <RadzenRadioButtonList @bind-Value="produto.Origem" TValue="int" class="rz-m-4">
+                    <RadzenRadioButtonList @bind-Value="produto.Origem" TValue="int" class="rz-m-2">
                         <Items>
                             <RadzenRadioButtonListItem Text="Brechó" Value="1" />
                             <RadzenRadioButtonListItem Text="Camila" Value="2" />
@@ -93,10 +93,10 @@
                 </RadzenFormField>
             </RadzenStack>
         </RadzenColumn>
-        <RadzenButton ButtonType="ButtonType.Submit" Text="Cadastrar" Icon="add_box" ></RadzenButton>
+         <RadzenButton class="rz-p-4" Size="ButtonSize.Medium" ButtonType="ButtonType.Submit" Text="Cadastrar" Icon="add_box"></RadzenButton>
     </RadzenRow>
 </RadzenTemplateForm>
 
 @code {
-    private Produto produto = new Produto();
+    internal Produto produto = new Produto();
  }

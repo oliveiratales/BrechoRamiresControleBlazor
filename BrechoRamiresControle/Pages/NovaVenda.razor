@@ -7,5 +7,92 @@
     Nova Venda
 </RadzenText>
 
-@code {
+<RadzenTemplateForm Data="@venda" class="rz-p-2">
+    <RadzenRow Gap="1rem">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack>
+                <RadzenFormField Text="Data">
+                    <ChildContent>
+                        <RadzenDatePicker TValue="DateTime?" Value="@value" Change="@(args => value = args)" />
+                    </ChildContent>
+                    <Helper>
+                        <RadzenRequiredValidator Component="Data" Text="A data de venda é obrigatória!" />
+                    </Helper>
+                </RadzenFormField>
+
+                <RadzenFormField Text="Cliente">
+                    <RadzenTextBox @bind-Value="venda.Cliente" />
+                </RadzenFormField>
+             
+                <RadzenFormField Text="Produtos">
+                    <RadzenDropDownDataGrid @ref="grid" Chips="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowClear="true" @bind-Value=@values
+                                            Multiple="true" Placeholder="Selecione os produtos" Data=@produtos TextProperty="CompanyName" ValueProperty="CustomerID">
+                        <Columns>
+                            <RadzenDropDownDataGridColumn Width="60px" Sortable="false">
+                                <HeaderTemplate>
+                                    <RadzenCheckBox Disabled="@(!grid.AllowSelectAll)"
+                                                    TriState="false"
+                                                    TValue="bool"
+                                                    Value="@(produtos.Any(c => values != null && c.Codigo != null && values.Contains(c.Codigo)))"
+                                                    Change="@(args => values = args ? grid.View.Cast<Produto>().Select(c => c.Codigo) : values = Enumerable.Empty<string>())" />
+                                </HeaderTemplate>
+                                <Template Context="data">
+                                    <RadzenCheckBox TriState="false"
+                                                    Value="@(values != null && values.Contains(((Produto) data).Codigo))"
+                                                    TValue="bool"
+                                                    Change=@(args => grid.SelectItem(data)) @onclick:stopPropagation />
+                                </Template>
+                            </RadzenDropDownDataGridColumn>
+                            <RadzenDropDownDataGridColumn Property="Codigo" Title="Código" Width="80px" />
+                            <RadzenDropDownDataGridColumn Property="Nome" Title="Nome" Width="180px" />
+                            <RadzenDropDownDataGridColumn Property="Categoria" Title="Categoria" Width="100px" />
+                            <RadzenDropDownDataGridColumn Property="Preco" Title="Preco" Width="100px" />
+                        </Columns>
+                    </RadzenDropDownDataGrid>
+                </RadzenFormField>
+            </RadzenStack>
+        </RadzenColumn>
+
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack>
+                <RadzenFormField Text="Vendedor">
+                    <RadzenRadioButtonList @bind-Value="venda.Vendedor" TValue="int" class="rz-m-2">
+                        <Items>
+                            <RadzenRadioButtonListItem Text="Camila" Value="1" />
+                            <RadzenRadioButtonListItem Text="Daniela" Value="2" />
+                        </Items>
+                    </RadzenRadioButtonList>
+                </RadzenFormField>
+
+                <RadzenFormField Text="Forma de Pagamento">
+                    <ChildContent>
+                        <RadzenDropDown Name="Forma de Pagamento" @bind-Value="venda.FormaDePagamento" />
+                    </ChildContent>
+                    <Helper>
+                        <RadzenRequiredValidator Component="Forma de Pagamento" Text="A forma de pagamento é obrigatória!" />
+                    </Helper>
+                </RadzenFormField>
+
+                <RadzenFormField Text="Desconto">
+                    <RadzenNumeric Format="C" Name="Desconto" @bind-Value="venda.Desconto" />
+                </RadzenFormField>              
+             </RadzenStack>
+         </RadzenColumn>
+
+        <RadzenFormField Text="Valor">
+            <RadzenNumeric Format="C" Name="Valor" @bind-Value="venda.Valor" Disabled />
+         </RadzenFormField>
+
+         <RadzenButton ButtonType="ButtonType.Submit" Text="Registrar" Icon="add_box"></RadzenButton>
+     </RadzenRow>
+ </RadzenTemplateForm>
+
+ @code {
+    internal Venda venda = new Venda();
+
+    DateTime? value = DateTime.Now;
+
+    RadzenDropDownDataGrid<IEnumerable<string>> grid;
+    IEnumerable<Produto> produtos;
+    IEnumerable<string> values = new string[] { "Calça", "Sapato" };
 }

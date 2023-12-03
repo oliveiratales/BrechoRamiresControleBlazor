@@ -1,8 +1,47 @@
 ﻿@page "/indicadores"
+@using System.Globalization
 
 <PageTitle>Brechó Ramires - Indicadores</PageTitle>
 
-<h1>Indicadores</h1>
+<RadzenText TextStyle="TextStyle.DisplayH4">
+    <RadzenIcon Icon="trending_up" />
+    Indicadores
+</RadzenText>
+
+<RadzenRow class="rz-p-2" Gap="1rem">
+    <RadzenColumn>
+        <RadzenChart>
+            <RadzenColumnSeries Data="@revenue" CategoryProperty="Quarter" ValueProperty="Revenue" />
+            <RadzenValueAxis FormatString="{0:C}" />
+        </RadzenChart>
+    </RadzenColumn>
+
+    <RadzenColumn>
+        <RadzenChart>
+            <RadzenDonutSeries Data="@revenue" CategoryProperty="Quarter" ValueProperty="Revenue" TotalAngle="180" StartAngle="180">
+                <TitleTemplate>
+                    <div class="rz-donut-content">
+                        <div>Final do Ano</div>
+                        <div>2023</div>
+                    </div>
+                </TitleTemplate>
+            </RadzenDonutSeries>
+        </RadzenChart>
+    </RadzenColumn>   
+</RadzenRow>
 
 @code {
+    class DataItem
+    {
+        public string Quarter { get; set; }
+        public double Revenue { get; set; }
+    }
+
+    DataItem[] revenue = new DataItem[]
+    {
+      new DataItem { Quarter = "Setembro", Revenue = 1500 },
+      new DataItem { Quarter = "Outubro", Revenue = 2000 },
+      new DataItem { Quarter = "Novembro", Revenue = 2200 },
+      new DataItem { Quarter = "Dezembro", Revenue = 3100 }
+    };
 }

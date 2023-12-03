@@ -2,7 +2,26 @@
 
 <PageTitle>Brechó Ramires - Vendas</PageTitle>
 
-<h1>Vendas</h1>
+<RadzenText TextStyle="TextStyle.DisplayH4">
+    <RadzenIcon Icon="inventory" />
+    Nova Venda
+</RadzenText>
+
+<div class="rz-p-2 rz-mt-4">
+    <RadzenDataGrid class="rz-border-radius" AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                    Data="@ListaVendas" TItem="Venda" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" EmptyText="Ainda não há registros.">
+        <Columns>
+            <RadzenDataGridColumn TItem="Venda" Property="ID" Title="ID da Venda" Frozen="true" Width="110px" TextAlign="TextAlign.Center" />
+            <RadzenDataGridColumn TItem="Venda" Property="DataVenda" Title="Data" Width="180px" />
+            <RadzenDataGridColumn TItem="Venda" Property="Valor" Title="Valor" Width="130px" />
+            <RadzenDataGridColumn TItem="Venda" Property="FormaDePagamento" Title="Forma de Pagamento" Width="120px" />
+            <RadzenDataGridColumn TItem="Venda" Property="Cliente" Title="Cliente" Width="120px" />
+            <RadzenDataGridColumn TItem="Venda" Property="Vendedor" Title="Vendedor" Width="150px" />
+            <RadzenDataGridColumn TItem="Venda" Property="Produtos" Title="Produtos" Width="100px" />
+        </Columns>
+    </RadzenDataGrid>
+</div>
 
 @code {
+    internal List<Venda> ListaVendas = new List<Venda>();
 }
