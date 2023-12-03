@@ -7,7 +7,7 @@
     Cadastrar Produto
 </RadzenText>
 
-<RadzenTemplateForm Data=@produto class="">
+<RadzenTemplateForm Data=@produto class="rz-p-2">
     <RadzenRow Gap="1rem">
         <RadzenColumn Size="12" SizeMD="6">
             <RadzenStack>
@@ -82,7 +82,7 @@
                 </RadzenFormField>
 
                 <RadzenFormField Text="Origem">
-                    <RadzenRadioButtonList @bind-Value="produto.Origem" TValue="int" class="rz-m-4 rz-mt-8">
+                    <RadzenRadioButtonList @bind-Value="produto.Origem" TValue="int" class="rz-m-4">
                         <Items>
                             <RadzenRadioButtonListItem Text="Brechó" Value="1" />
                             <RadzenRadioButtonListItem Text="Camila" Value="2" />
